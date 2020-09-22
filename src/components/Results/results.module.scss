@@ -1,0 +1,28 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  margin-top: 2px;
+  margin-right: 2px;
+
+  .table {
+    border-collapse: collapse;
+
+    td {
+      font-size: 12px;
+      line-height: 1rem;
+      border: unset;
+      padding: 1px 0;
+
+      &:first-child,
+      &:last-child {
+        text-align: right;
+      }
+
+      &:last-child {
+        padding-left: 2px;
+      }
+    }
+  }
+}

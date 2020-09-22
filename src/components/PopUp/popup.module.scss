@@ -1,0 +1,63 @@
+@import '@scss/colors.scss';
+
+.popup {
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    background-color: $gray-200;
+    width: 600px;
+    height: 400px;
+    border-radius: 1rem;
+    position: relative;
+
+    .close_button {
+      cursor: pointer;
+      background-color: unset;
+      border: unset;
+      position: absolute;
+      right: 0;
+      margin: 5px 0 0 0;
+
+      .close_icon {
+        font-size: 1.5rem;
+        color: $primary;
+      }
+    }
+
+    & > div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .result_box {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba($primary, 0.1);
+      border-radius: 1rem;
+      width: 230px;
+      height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .result_text {
+        font-size: 70px;
+      }
+
+      .label {
+        font-size: 20px;
+      }
+    }
+  }
+}

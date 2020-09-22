@@ -1,0 +1,10 @@
+@import '@scss/colors.scss';
+
+html {
+  background-color: $gray-200;
+  overflow-y: auto;
+
+  *:active {
+    outline: none !important;
+  }
+}

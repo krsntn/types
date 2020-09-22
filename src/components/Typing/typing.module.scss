@@ -1,0 +1,56 @@
+@import '@scss/colors.scss';
+
+.container {
+  padding: 20px;
+  background-color: $gray-400;
+  border-radius: 1rem;
+
+  .form {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > * {
+      margin: 4px 0;
+    }
+
+    .textarea {
+      font-size: 18px;
+      resize: none;
+      width: 100%;
+      border: 0px;
+      border-radius: 3px;
+      padding: 5px;
+      background-color: #fafafa;
+
+      &:focus,
+      &:active {
+        outline: $focus-color auto 1px;
+      }
+
+      &:disabled {
+        background-color: $gray-200;
+      }
+    }
+
+    .redo_button {
+      cursor: pointer;
+      border: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      background-color: transparent;
+
+      &:hover {
+        background-color: #efefef;
+      }
+
+      &:focus {
+        background-color: #efefef;
+        outline: $focus-color auto 1px;
+      }
+    }
+  }
+}
