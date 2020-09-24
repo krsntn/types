@@ -1,15 +1,21 @@
-const calcGrossWPM = ({ totalEntries, startTime, endTime }) => {
+const calcGrossWPM = ({totalEntries, startTime, endTime}) => {
   return Math.floor(totalEntries / 5 / ((endTime - startTime) / 1000 / 60));
 };
 
-const calcNetWPM = ({ totalEntries, totalWrong, startTime, endTime }) => {
+const calcNetWPM = ({totalEntries, totalMistake, startTime, endTime}) => {
   return Math.floor(
-    (totalEntries / 5 - totalWrong / 5) / ((endTime - startTime) / 1000 / 60)
+    (totalEntries / 5 - totalMistake / 5) / ((endTime - startTime) / 1000 / 60)
   );
 };
 
-const calcAcc = ({ grossWPM, netWPM }) => {
+const calcAcc = ({grossWPM, netWPM}) => {
   return Math.floor((netWPM / grossWPM) * 100);
 };
 
-export { calcGrossWPM, calcNetWPM, calcAcc };
+const calcAveWPM = ({totalRound, averageWPM, lastRoundWPM}) => {
+  return Math.floor(
+    (averageWPM * (totalRound - 1) + lastRoundWPM) / totalRound
+  );
+};
+
+export {calcGrossWPM, calcNetWPM, calcAcc, calcAveWPM};

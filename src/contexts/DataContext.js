@@ -1,10 +1,10 @@
-import React, { createContext, useReducer } from 'react';
-import { calcGrossWPM, calcNetWPM, calcAcc } from '@utils/calcSpeed';
+import React, {createContext, useReducer} from 'react';
+import {calcGrossWPM, calcNetWPM, calcAcc, calcAveWPM} from '@utils/calcSpeed';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'startTest':
-      return { ...state, testStart: true };
+      return {...state, testStart: true};
     case 'finishTest':
       const newData = action.payload;
       const grossWPM = calcGrossWPM({
@@ -15,7 +15,7 @@ const reducer = (state, action) => {
 
       const netWPM = calcNetWPM({
         totalEntries: newData.totalEntries,
-        totalWrong: newData.totalWrong,
+        totalMistake: newData.totalMistake,
         startTime: newData.startTime,
         endTime: newData.endTime,
       });
@@ -30,44 +30,73 @@ const reducer = (state, action) => {
           ? grossWPM
           : state.fastestWPM;
 
+      const newUserData = {
+        totalRound: state.totalRound + 1,
+        lastRoundWPM: grossWPM,
+        averageWPM: calcAveWPM({
+          totalRound: state.totalRound + 1,
+          averageWPM: state.averageWPM === '-' ? 0 : state.averageWPM,
+          lastRoundWPM: grossWPM,
+        }),
+        fastestWPM: newFastestWPM,
+      };
+
+      if (typeof window !== 'undefined') {
+        window.sessionStorage.setItem('userData', JSON.stringify(newUserData));
+      }
+
       return {
         ...state,
-        fastestWPM: newFastestWPM,
-        lastRoundWPM: grossWPM,
+        ...newUserData,
         accuracy: acc,
         showPopUp: true,
         testEnd: true,
       };
     case 'redo':
-      return { ...state, testStart: false, testEnd: false };
+      return {...state, testStart: false, testEnd: false};
     case 'showPopUp':
-      return { ...state, showPopUp: true };
+      return {...state, showPopUp: true};
     case 'closePopUp':
-      return { ...state, showPopUp: false };
+      return {...state, showPopUp: false};
   }
 };
 
-const initialState = {
-  totalRound: 0,
-  lastRoundWPM: '-',
-  averageWPM: '-',
-  fastestWPM: '-',
-  accuracy: '-',
-  showPopUp: false,
-  testStart: false,
-  testEnd: false,
+const initialState = () => {
+  const initialValue = {
+    totalRound: 0,
+    lastRoundWPM: '-',
+    averageWPM: '-',
+    fastestWPM: '-',
+    accuracy: '-',
+    showPopUp: false,
+    testStart: false,
+    testEnd: false,
+  };
+
+  if (typeof window !== 'undefined') {
+    let userData = window.sessionStorage.getItem('userData');
+    if (userData) {
+      userData = JSON.parse(userData);
+      initialValue.totalRound = userData.totalRound;
+      initialValue.lastRoundWPM = userData.lastRoundWPM;
+      initialValue.averageWPM = userData.averageWPM;
+      initialValue.fastestWPM = userData.fastestWPM;
+    }
+  }
+
+  return initialValue;
 };
 
 const DataProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState());
 
   return (
-    <DataContext.Provider value={{ state, dispatch }}>
+    <DataContext.Provider value={{state, dispatch}}>
       {props.children}
     </DataContext.Provider>
   );
 };
 
-const DataContext = createContext(initialState);
+const DataContext = createContext();
 
-export { DataContext, DataProvider };
+export {DataContext, DataProvider};

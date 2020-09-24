@@ -1,0 +1,48 @@
+@import '@scss/colors.scss';
+
+.wrapper {
+  padding: 10px;
+
+  .bar {
+    position: relative;
+    height: 6px;
+    width: 100%;
+    border-radius: 3px;
+    background-color: rgba(#000, 0.2);
+
+    &[data-started='true'] {
+      background-color: rgba($primary, 0.2);
+    }
+
+    .loading {
+      visibility: hidden;
+      height: 100%;
+      border-radius: 3px;
+      background-size: 400% 100%;
+      background-image: linear-gradient(to right, $gray-600, $white, $gray-600);
+      animation: waves 6s linear alternate infinite;
+
+      &[data-started='true'] {
+        visibility: visible;
+      }
+    }
+
+    .progress {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 0;
+      border-radius: 3px;
+      background-color: $primary;
+    }
+  }
+}
+
+@keyframes waves {
+  from {
+    background-position: 100% 0%;
+  }
+  to {
+    background-position: 0% 0%;
+  }
+}
