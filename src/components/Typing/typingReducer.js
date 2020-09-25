@@ -4,15 +4,23 @@ function reducer(state, action) {
   switch (action.type) {
     case 'type':
       const {newIndex, newObj, progress} = action.payload;
-      console.log('progress', progress);
       return {
         ...state,
         wordIndex: newIndex,
         updatedArrayWords: newObj,
         progress,
+        hitMistake: newObj.some((word) => word.error),
       };
     case 'mistake':
-      return {...state, totalMistake: state.totalMistake + 1};
+      if (state.hitMistake) {
+        return {...state};
+      } else {
+        return {
+          ...state,
+          totalMistake: state.totalMistake + 1,
+          hitMistake: true,
+        };
+      }
     case 'start':
       return {...state, startTime: performance.now()};
     case 'newSentence':
@@ -24,10 +32,8 @@ function reducer(state, action) {
       };
     case 'redo':
       return {
-        ...state,
+        ...initialState,
         sentence: textList[Math.floor(Math.random() * textList.length)].text,
-        wordIndex: 0,
-        progress: 0,
       };
     default:
       throw new Error(`Unhandled type: ${action.type}`);
@@ -41,6 +47,7 @@ const initialState = {
   arrayWords: null,
   updatedArrayWords: null,
   totalMistake: 0,
+  hitMistake: false,
   sentence: textList[Math.floor(Math.random() * textList.length)].text,
 };
 

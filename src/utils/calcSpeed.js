@@ -9,7 +9,7 @@ const calcNetWPM = ({totalEntries, totalMistake, startTime, endTime}) => {
 };
 
 const calcAcc = ({grossWPM, netWPM}) => {
-  return Math.floor((netWPM / grossWPM) * 100);
+  return ((netWPM / grossWPM) * 100).toFixed(1);
 };
 
 const calcAveWPM = ({totalRound, averageWPM, lastRoundWPM}) => {

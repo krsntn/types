@@ -83,7 +83,7 @@ const Typing = (props) => {
             (i !== arrInputValue.length - 1 &&
               arrInputValue[i] !== toFollowValue[i].text)
           ) {
-            if (!toFollowValue[i].error) localDispatch({type: 'mistake'});
+            localDispatch({type: 'mistake'});
             toFollowValue[i].passed = false;
             toFollowValue[i].error = true;
             break;
