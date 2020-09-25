@@ -22,9 +22,10 @@
       background-image: linear-gradient(
         90deg,
         $gray-600 0%,
-        #cfd2d5 40%,
+        $gray-400 40%,
         $white 50%,
-        #cfd2d5 60% $gray-600 100%
+        $gray-400 60%,
+        $gray-600 100%
       );
       animation: waves 6s linear alternate infinite;
 
