@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import {useStaticQuery, graphql} from 'gatsby';
 
 import TopBar from '@components/TopBar';
 import css from '@components/Layout.module.scss';
 
-const Layout = ({ children }) => {
+const Layout = ({children}) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
       <footer className={css.footer}>
         © 2020, built by
         {` `}
-        <a href="https://dev.karson.tk">karson</a>
+        <a href="https://dev.krsn.xyz">karson</a>
       </footer>
     </div>
   );
