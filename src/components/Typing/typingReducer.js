@@ -1,4 +1,4 @@
-import textList from '../../../textList.json';
+import {paragraph} from 'txtgen';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -33,7 +33,7 @@ function reducer(state, action) {
     case 'redo':
       return {
         ...initialState,
-        sentence: textList[Math.floor(Math.random() * textList.length)].text,
+        sentence: paragraph(),
       };
     default:
       throw new Error(`Unhandled type: ${action.type}`);
@@ -48,7 +48,7 @@ const initialState = {
   updatedArrayWords: null,
   totalMistake: 0,
   hitMistake: false,
-  sentence: textList[Math.floor(Math.random() * textList.length)].text,
+  sentence: paragraph(),
 };
 
 export {reducer, initialState};
