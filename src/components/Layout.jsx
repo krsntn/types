@@ -25,7 +25,7 @@ const Layout = ({children}) => {
   return (
     <div className={css.layout}>
       <TopBar siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <main>{children}</main>
+      <main className={css.main}>{children}</main>
       <footer className={css.footer}>
         © 2020, built by
         {` `}

@@ -1,5 +1,6 @@
 .layout {
   position: relative;
+
   width: 700px;
   min-height: 100vh;
   margin: auto;
@@ -7,6 +8,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  .main {
+    min-width: 700px;
+  }
 
   .footer {
     text-align: center;

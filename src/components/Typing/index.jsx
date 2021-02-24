@@ -1,4 +1,10 @@
-import React, {useEffect, useCallback, useContext, useReducer} from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  useContext,
+  useReducer,
+  useState,
+} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faRedo} from '@fortawesome/free-solid-svg-icons';
 import css from './typing.module.scss';
@@ -12,6 +18,7 @@ import {reducer, initialState} from './typingReducer';
 const Typing = (props) => {
   const [localState, localDispatch] = useReducer(reducer, initialState);
   const {state, dispatch} = useContext(DataContext);
+  const [isSentence, setIsSentence] = useState(true);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -50,8 +57,8 @@ const Typing = (props) => {
     redoButton.focus();
   }, []);
 
-  const handleRedo = useCallback(() => {
-    localDispatch({type: 'redo'});
+  const handleRedo = useCallback((isSentence) => {
+    localDispatch({type: 'redo', payload: {isSentence}});
     dispatch({type: 'redo'});
     setTimeout(() => {
       const textarea = document.querySelector('textarea');
@@ -116,9 +123,15 @@ const Typing = (props) => {
     [localState]
   );
 
+  const onTestModeToggle = useCallback(() => {
+    const newIsSentence = !isSentence;
+    setIsSentence(newIsSentence);
+    handleRedo(newIsSentence);
+  }, [isSentence]);
+
   return (
     <div>
-      <Results />
+      <Results isSentence={isSentence} onTestModeToggle={onTestModeToggle} />
       <ProgressBar started={state.testStart} progress={localState.progress} />
       <div className={css.container}>
         <div>
@@ -137,7 +150,7 @@ const Typing = (props) => {
           <button
             type="button"
             className={css.redo_button}
-            onClick={handleRedo}>
+            onClick={() => handleRedo(isSentence)}>
             <FontAwesomeIcon icon={faRedo} />
           </button>
         </form>

@@ -1,4 +1,4 @@
-import {paragraph} from 'txtgen/dist/txtgen.min';
+import {sentence, paragraph} from 'txtgen/dist/txtgen.min';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -33,7 +33,7 @@ function reducer(state, action) {
     case 'redo':
       return {
         ...initialState,
-        sentence: paragraph(),
+        sentence: action.payload.isSentence ? sentence() : paragraph(),
       };
     default:
       throw new Error(`Unhandled type: ${action.type}`);
@@ -48,7 +48,7 @@ const initialState = {
   updatedArrayWords: null,
   totalMistake: 0,
   hitMistake: false,
-  sentence: paragraph(),
+  sentence: sentence(),
 };
 
 export {reducer, initialState};

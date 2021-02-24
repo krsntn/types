@@ -1,55 +1,68 @@
 @import '@scss/colors.scss';
 
-.container {
-  font-size: 1rem;
-  margin-top: 2px;
-  margin-right: 2px;
+.wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  color: $primary;
 
-  & > * {
+  .button {
+    background: none;
+    border: 0;
+    cursor: pointer;
     color: $primary;
-    user-select: none;
+  }
 
-    &:nth-child(odd) {
-      margin: 0 5px;
-    }
+  .container {
+    font-size: 1rem;
+    margin-top: 2px;
+    margin-right: 2px;
+    display: flex;
+    justify-content: flex-end;
 
-    .tooltip {
-      position: relative;
-      display: inline-block;
+    & > * {
+      color: $primary;
+      user-select: none;
 
-      .tooltip_text {
-        white-space: nowrap;
-        visibility: hidden;
-        background-color: $gray-400;
-        color: #000;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 10px;
-
-        /* Position the tooltip */
-        position: absolute;
-        right: 0;
-        bottom: 30px;
-        z-index: 1;
-
-        &::after {
-          width: 0;
-          height: 0;
-          bottom: -8px;
-          right: 1px;
-          position: absolute;
-          content: ' ';
-          border-top: 10px solid $gray-400;
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-        }
+      &:nth-child(odd) {
+        margin: 0 5px;
       }
 
-      &:hover {
+      .tooltip {
+        position: relative;
+        display: inline-block;
+
         .tooltip_text {
-          visibility: visible;
+          white-space: nowrap;
+          visibility: hidden;
+          background-color: $gray-400;
+          color: #000;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 10px;
+
+          /* Position the tooltip */
+          position: absolute;
+          right: 0;
+          bottom: 30px;
+          z-index: 1;
+
+          &::after {
+            width: 0;
+            height: 0;
+            bottom: -8px;
+            right: 1px;
+            position: absolute;
+            content: ' ';
+            border-top: 10px solid $gray-400;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+          }
+        }
+
+        &:hover {
+          .tooltip_text {
+            visibility: visible;
+          }
         }
       }
     }
