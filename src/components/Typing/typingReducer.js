@@ -1,4 +1,4 @@
-import {paragraph} from 'txtgen';
+import {paragraph} from 'txtgen/dist/txtgen.min';
 
 function reducer(state, action) {
   switch (action.type) {
